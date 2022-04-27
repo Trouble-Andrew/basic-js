@@ -13,9 +13,45 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ function transform(arr) {
+
+  if (!Array.isArray(arr)) {
+    throw new Error(`'arr' parameter must be an instance of the Array!`);
+  }
+
+  const arrayForCommand = arr.slice();  
+
+  function executeCommand(command, target, index) {
+    switch (command) {
+      case "--discard-next":
+        target[index + 1] ? target[index + 1] = null : '';
+        break;
+      case "--discard-prev":
+        target[index - 1] ? target[index - 1] = null : '';
+        break;
+      case "--double-next":
+        target[index + 1] ? target.splice(index, 1, target[index + 1]) : '';
+        break;
+      case "--double-prev":
+        target[index - 1] ? target.splice(index, 1, target[index - 1]) : '';
+        break;
+      default:
+        return;
+    }
+  }
+
+  arrayForCommand.forEach((element, index)  => {
+    if (typeof element === 'string') {
+      executeCommand(element, arrayForCommand, index)
+    }
+  });
+
+  return arrayForCommand.filter(number => {
+    if (number === '--discard-prev' || number === '--discard-next' || number === '--double-next' || number === '--double-prev') {
+      return;
+    }
+    return number;
+  })
 }
 
 module.exports = {
