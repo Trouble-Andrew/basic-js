@@ -10,10 +10,24 @@ const { NotImplementedError } = require('../extensions/index.js');
  * For the input 'prettyandsimple@example.com', the output should be 'example.com'
  *
  */
-function getEmailDomain(/* email */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+
+//  function getEmailDomain(email) {
+//   const domainArray = email.match(/(?<=([\w-\.]@))((?:[\w]+\.|[\w-])+)([a-zA-Z]{2,})/g);
+   
+//   //  if (email) {
+//   //   const domainArray = email.match(/(?<=([\w-\.]@))((?:[\w]+\.|[\w-])+)([a-zA-Z]{2,})/g);
+     
+//   //   if (domainArray.leng) {
+      
+//   //     return domainArray.join();
+//   //   }
+//   // }
+
+//   // return domainArray ? domainArray.join() : '';
+//   return email.match(/(?<=([\w-\.]@))((?:[\w]+\.|[\w-])+)([a-zA-Z]{2,})/g).join();
+// }
+
+const getEmailDomain = (email) => email.match(/(?<=([\w-\.]@))((?:[\w]+\.|[\w-])+)([a-zA-Z]{2,})/g).join();
 
 module.exports = {
   getEmailDomain
