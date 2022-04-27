@@ -20,7 +20,7 @@ function getSumOfDigits(n) {
     n = n.reduce((acc, number) => {
       return acc += number;
     });
-    getSumOfDigits(n);
+    return getSumOfDigits(n);
   };
 }
 
